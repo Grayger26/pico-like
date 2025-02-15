@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxofhk82pr3ya"]
+
+[ext_resource type="Shader" path="res://other/crt.gdshader" id="1_p7j5d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_urnbv"]
+shader = ExtResource("1_p7j5d")
+shader_parameter/resolution = Vector2(795, 405)
+shader_parameter/scan_line_amount = 0.5
+shader_parameter/warp_amount = 0.0
+shader_parameter/noise_amount = 0.0
+shader_parameter/interference_amount = 0.0
+shader_parameter/grille_amount = 0.0
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.0
+shader_parameter/vignette_intensity = 0.0
+shader_parameter/aberation_amount = 0.0
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = -8.0
+shader_parameter/scan_line_strength = -12.0
+shader_parameter/pixel_strength = -4.0
+
+[node name="CRT" type="ColorRect"]
+material = SubResource("ShaderMaterial_urnbv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)

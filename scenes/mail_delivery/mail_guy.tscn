@@ -1,0 +1,201 @@
+[gd_scene load_steps=17 format=3 uid="uid://bm78uk3ees0c3"]
+
+[ext_resource type="Script" path="res://scripts/mail_guy.gd" id="1_73j0g"]
+[ext_resource type="Texture2D" uid="uid://3ixiktckyfqb" path="res://assets/mail game/mail_guy.png" id="1_t8gux"]
+[ext_resource type="PackedScene" uid="uid://djf5a86puw0xu" path="res://scenes/mail_delivery/newspaper.tscn" id="2_e7qx0"]
+[ext_resource type="AudioStream" uid="uid://6x88solf4imm" path="res://assets/mail game/sfx/lose.wav" id="4_b8onc"]
+[ext_resource type="AudioStream" uid="uid://g2sxkw7ypuhc" path="res://assets/mail game/sfx/mailmanHurt.wav" id="5_c7dsw"]
+
+[sub_resource type="Animation" id="Animation_d0us6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_l3nei"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8yyn3"]
+resource_name = "move_left"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_fjbv3"]
+resource_name = "move_right"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_tx5im"]
+resource_name = "throw"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1btw4"]
+_data = {
+"RESET": SubResource("Animation_d0us6"),
+"idle": SubResource("Animation_l3nei"),
+"move_left": SubResource("Animation_8yyn3"),
+"move_right": SubResource("Animation_fjbv3"),
+"throw": SubResource("Animation_tx5im")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7d3j6"]
+size = Vector2(4, 7.96177)
+
+[sub_resource type="Animation" id="Animation_hubep"]
+resource_name = "hurt"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.959805, 0, 0.102441, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hedlg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.959805, 0, 0.102441, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8gtab"]
+resource_name = "normal"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q3an5"]
+_data = {
+"RESET": SubResource("Animation_hedlg"),
+"hurt": SubResource("Animation_hubep"),
+"normal": SubResource("Animation_8gtab")
+}
+
+[node name="mailGuy" type="CharacterBody2D"]
+modulate = Color(0.959805, 0, 0.102441, 1)
+z_index = 1
+collision_mask = 273
+motion_mode = 1
+script = ExtResource("1_73j0g")
+newspaper = ExtResource("2_e7qx0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_t8gux")
+hframes = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1btw4")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.01911)
+shape = SubResource("RectangleShape2D_7d3j6")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0.00276566, -5.91115)
+
+[node name="ThrowTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="LoseSound" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_b8onc")
+volume_db = -12.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q3an5")
+}
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_c7dsw")
+
+[connection signal="timeout" from="ThrowTimer" to="." method="_on_throw_timer_timeout"]

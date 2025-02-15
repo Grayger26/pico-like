@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://cd8yjx1xgufm3"]
+
+[ext_resource type="Texture2D" uid="uid://b6a5odnbp37rp" path="res://assets/mail game/gun.png" id="1_mtsrd"]
+[ext_resource type="Script" path="res://scripts/gun.gd" id="1_nkgtr"]
+[ext_resource type="PackedScene" uid="uid://dobghgt0mxo65" path="res://scenes/mail_delivery/bullet.tscn" id="2_pf4rb"]
+[ext_resource type="AudioStream" uid="uid://cpy8rynamxtwn" path="res://assets/mail game/sfx/laserShoot (2).wav" id="4_u4gou"]
+
+[sub_resource type="Animation" id="Animation_hq2kc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_s7d4f"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_dfpo7"]
+resource_name = "shoot"
+length = 0.17
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fcf00"]
+_data = {
+"RESET": SubResource("Animation_hq2kc"),
+"idle": SubResource("Animation_s7d4f"),
+"shoot": SubResource("Animation_dfpo7")
+}
+
+[node name="Gun" type="Node2D"]
+z_index = 1
+script = ExtResource("1_nkgtr")
+bullet_scene = ExtResource("2_pf4rb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 5)
+texture = ExtResource("1_mtsrd")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fcf00")
+}
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, 4)
+
+[node name="shoot_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_u4gou")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

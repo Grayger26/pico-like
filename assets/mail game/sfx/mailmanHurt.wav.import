@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://g2sxkw7ypuhc"
+path="res://.godot/imported/mailmanHurt.wav-b28e302462e00e78ebaf2a14d7cf6b30.sample"
+
+[deps]
+
+source_file="res://assets/mail game/sfx/mailmanHurt.wav"
+dest_files=["res://.godot/imported/mailmanHurt.wav-b28e302462e00e78ebaf2a14d7cf6b30.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

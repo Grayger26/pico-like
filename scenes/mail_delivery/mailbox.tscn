@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbd2kcb1pricg"]
+
+[ext_resource type="Script" path="res://scripts/mailbox.gd" id="1_c7qn4"]
+[ext_resource type="Texture2D" uid="uid://bk06qgv7rl4l2" path="res://assets/mail game/red_mailbox.png" id="1_q2uko"]
+[ext_resource type="AudioStream" uid="uid://cfiw6aoio02bx" path="res://assets/mail game/sfx/pickupCoin.wav" id="3_r770v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysdsi"]
+size = Vector2(3.73203, 3.83061)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy8gb"]
+size = Vector2(6.49905, 7.97401)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_df2a8"]
+size = Vector2(4.94885, 9.19811)
+
+[node name="Mailbox" type="Area2D"]
+collision_layer = 32
+collision_mask = 80
+script = ExtResource("1_c7qn4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_q2uko")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.537519, 1.92302)
+shape = SubResource("RectangleShape2D_ysdsi")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="wall_detector" type="Area2D" parent="."]
+position = Vector2(-0.014782, 0.0811825)
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall_detector"]
+position = Vector2(0.491589, -0.0758744)
+shape = SubResource("RectangleShape2D_wy8gb")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+collision_layer = 128
+collision_mask = 64
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0.505623, -0.576859)
+shape = SubResource("RectangleShape2D_df2a8")
+disabled = true
+
+[node name="WinSound" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_r770v")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="wall_detector" to="." method="_on_wall_detector_body_entered"]

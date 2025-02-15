@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://djf5a86puw0xu"]
+
+[ext_resource type="Texture2D" uid="uid://8ullyltnow7f" path="res://assets/mail game/newspaper.png" id="1_fwf0b"]
+[ext_resource type="Script" path="res://scripts/newspaper.gd" id="2_xdurk"]
+[ext_resource type="AudioStream" uid="uid://dykwplohfj7ki" path="res://assets/mail game/sfx/click (1).wav" id="3_kq7hg"]
+[ext_resource type="AudioStream" uid="uid://btp0mfe85c2ng" path="res://assets/mail game/sfx/hitHurt.wav" id="3_wav10"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scloc"]
+atlas = ExtResource("1_fwf0b")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mesu7"]
+atlas = ExtResource("1_fwf0b")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdi1g"]
+atlas = ExtResource("1_fwf0b")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sd34"]
+atlas = ExtResource("1_fwf0b")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wrwtd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scloc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mesu7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdi1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sd34")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_64nlo"]
+radius = 2.0
+
+[node name="Newspaper" type="AnimatedSprite2D" groups=["newspaper"]]
+sprite_frames = SubResource("SpriteFrames_wrwtd")
+autoplay = "default"
+frame_progress = 0.60284
+script = ExtResource("2_xdurk")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 177
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_64nlo")
+
+[node name="trow_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kq7hg")
+
+[node name="wall_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wav10")
+volume_db = 6.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,316 @@
+[gd_scene load_steps=19 format=3 uid="uid://dwmnd6dahg7he"]
+
+[ext_resource type="Script" path="res://scripts/mail_game.gd" id="1_b140k"]
+[ext_resource type="Texture2D" uid="uid://vjnf83spe4ne" path="res://assets/mail game/mail set.png" id="1_jrxus"]
+[ext_resource type="PackedScene" uid="uid://bm78uk3ees0c3" path="res://scenes/mail_delivery/mail_guy.tscn" id="2_b0yx7"]
+[ext_resource type="PackedScene" uid="uid://cbd2kcb1pricg" path="res://scenes/mail_delivery/mailbox.tscn" id="3_buaww"]
+[ext_resource type="PackedScene" uid="uid://cror10w8e5pau" path="res://scenes/mail_delivery/small_platform.tscn" id="4_sbwni"]
+[ext_resource type="Script" path="res://scripts/platforms.gd" id="4_tbvnb"]
+[ext_resource type="PackedScene" uid="uid://drdxfktspl0qe" path="res://scenes/mail_delivery/big_platform.tscn" id="5_1k2yw"]
+[ext_resource type="Texture2D" uid="uid://8ullyltnow7f" path="res://assets/mail game/newspaper.png" id="7_4g0iq"]
+[ext_resource type="Script" path="res://scripts/mailgame_ui.gd" id="7_yeuba"]
+[ext_resource type="Texture2D" uid="uid://balolv2m5fscj" path="res://assets/graphics/tilemap/base_tilemap.png" id="8_h7ew8"]
+[ext_resource type="LabelSettings" uid="uid://dhipagku55rpd" path="res://scenes/mail_delivery/label_settings.tres" id="9_ooydt"]
+[ext_resource type="FontFile" uid="uid://dejofkaqg05ai" path="res://assets/fonts/pico-8.ttf" id="11_hffyd"]
+[ext_resource type="AudioStream" uid="uid://dn1uj5p8aebpa" path="res://assets/mail game/music/delivery_stage.wav" id="13_hp84y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxptu"]
+size = Vector2(4, 82)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iy3j0"]
+size = Vector2(114, 3.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfc24"]
+atlas = ExtResource("7_4g0iq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd7cb"]
+atlas = ExtResource("8_h7ew8")
+region = Rect2(128, 16, 16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hwlbh"]
+font = ExtResource("11_hffyd")
+font_size = 6
+font_color = Color(1, 0.92549, 0.152941, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MailGame" type="Node2D"]
+script = ExtResource("1_b140k")
+
+[node name="Blur" type="ColorRect" parent="."]
+offset_right = 240.0
+offset_bottom = 144.0
+color = Color(1, 1, 1, 0.219608)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 176.0
+offset_bottom = 112.0
+color = Color(0.513726, 0.462745, 0.611765, 1)
+
+[node name="Frame" type="NinePatchRect" parent="."]
+z_index = 10
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 176.0
+offset_bottom = 112.0
+texture = ExtResource("1_jrxus")
+region_rect = Rect2(80, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="mailGuy" parent="." instance=ExtResource("2_b0yx7")]
+position = Vector2(120, 104)
+collision_mask = 16
+
+[node name="walls" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 233
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
+position = Vector2(64, 71)
+shape = SubResource("RectangleShape2D_uxptu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
+position = Vector2(176, 71)
+shape = SubResource("RectangleShape2D_uxptu")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls"]
+position = Vector2(119, 32.25)
+shape = SubResource("RectangleShape2D_iy3j0")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls"]
+position = Vector2(119, 112.5)
+shape = SubResource("RectangleShape2D_iy3j0")
+
+[node name="Mailbox" parent="." instance=ExtResource("3_buaww")]
+position = Vector2(119, 39)
+
+[node name="Platforms" type="Node2D" parent="."]
+script = ExtResource("4_tbvnb")
+small_platform = ExtResource("4_sbwni")
+big_platform = ExtResource("5_1k2yw")
+
+[node name="Marker2D" type="Marker2D" parent="Platforms"]
+position = Vector2(120, 50)
+
+[node name="Marker2D2" type="Marker2D" parent="Platforms"]
+position = Vector2(120, 59)
+
+[node name="Marker2D3" type="Marker2D" parent="Platforms"]
+position = Vector2(120, 70)
+
+[node name="Marker2D4" type="Marker2D" parent="Platforms"]
+position = Vector2(120, 81)
+
+[node name="MailgameUI" type="Control" parent="."]
+process_mode = 3
+z_index = 20
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_yeuba")
+
+[node name="Panel" type="NinePatchRect" parent="MailgameUI"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 13.0
+offset_right = 144.0
+offset_bottom = 28.0
+texture = ExtResource("1_jrxus")
+region_rect = Rect2(80, 16, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="NewspaperTexture" type="TextureRect" parent="MailgameUI"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 13.0
+offset_right = 133.0
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_mfc24")
+stretch_mode = 2
+
+[node name="HpTexture" type="TextureRect" parent="MailgameUI"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 12.0
+offset_right = 109.0
+offset_bottom = 28.0
+texture = SubResource("AtlasTexture_sd7cb")
+stretch_mode = 2
+
+[node name="HpLabel" type="Label" parent="MailgameUI"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 17.0
+offset_right = 116.0
+offset_bottom = 23.0
+text = "2"
+label_settings = ExtResource("9_ooydt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewspaperLabel" type="Label" parent="MailgameUI"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 17.0
+offset_right = 138.0
+offset_bottom = 23.0
+text = "2"
+label_settings = ExtResource("9_ooydt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MailgameUI"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 15.0
+offset_right = 121.0
+offset_bottom = 28.0
+texture = ExtResource("1_jrxus")
+region_rect = Rect2(80, 0, 2, 16)
+
+[node name="WinWindow" type="Control" parent="MailgameUI"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WinPanel" type="NinePatchRect" parent="MailgameUI/WinWindow"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 50.0
+offset_right = 146.0
+offset_bottom = 91.0
+texture = ExtResource("1_jrxus")
+region_rect = Rect2(80, 16, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Completed_msg" type="Label" parent="MailgameUI/WinWindow/WinPanel"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 4.0
+offset_right = 60.0
+offset_bottom = 19.0
+text = "dELIVERY 
+COMPLETED!"
+label_settings = ExtResource("9_ooydt")
+horizontal_alignment = 1
+
+[node name="OK" type="Label" parent="MailgameUI/WinWindow/WinPanel"]
+layout_mode = 0
+offset_left = 24.4857
+offset_top = 29.0224
+offset_right = 28.4857
+offset_bottom = 36.0224
+text = "z"
+label_settings = ExtResource("9_ooydt")
+horizontal_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MailgameUI/WinWindow/WinPanel"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 27.0
+offset_right = 30.0
+offset_bottom = 38.0
+texture = ExtResource("1_jrxus")
+region_rect = Rect2(64, 0, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="CoinNumLabel" type="Label" parent="MailgameUI/WinWindow/WinPanel"]
+layout_mode = 0
+offset_left = 18.7007
+offset_top = 22.3114
+offset_right = 30.7007
+offset_bottom = 29.3114
+scale = Vector2(0.5, 0.5)
+text = "99"
+label_settings = SubResource("LabelSettings_hwlbh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="MailgameUI/WinWindow/WinPanel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 22.0
+offset_right = 53.0
+offset_bottom = 29.0
+scale = Vector2(0.5, 0.5)
+text = "+   	COINS"
+label_settings = ExtResource("9_ooydt")
+
+[node name="LoseWindow" type="Control" parent="MailgameUI"]
+process_mode = 3
+visible = false
+anchors_preset = 0
+offset_top = -2.0
+offset_right = 40.0
+offset_bottom = 38.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MailgameUI/LoseWindow"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 55.0
+offset_right = 146.0
+offset_bottom = 90.0
+texture = ExtResource("1_jrxus")
+region_rect = Rect2(80, 16, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Failed_msg" type="Label" parent="MailgameUI/LoseWindow"]
+layout_mode = 0
+offset_left = 104.171
+offset_top = 59.2705
+offset_right = 136.171
+offset_bottom = 74.2705
+text = "dELIVERY 
+FAILED"
+label_settings = ExtResource("9_ooydt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OK" type="Label" parent="MailgameUI/LoseWindow"]
+layout_mode = 0
+offset_left = 117.74
+offset_top = 78.0045
+offset_right = 121.74
+offset_bottom = 84.0045
+text = "z"
+label_settings = ExtResource("9_ooydt")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="MailgameUI/LoseWindow"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 76.0
+offset_right = 124.0
+offset_bottom = 87.0
+texture = ExtResource("1_jrxus")
+region_rect = Rect2(64, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="BackgroundMusic" type="Node2D" parent="."]
+process_mode = 3
+
+[node name="bg1" type="AudioStreamPlayer2D" parent="BackgroundMusic"]
+stream = ExtResource("13_hp84y")
+autoplay = true

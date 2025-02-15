@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://cne40prwbrjb0"]
+
+[ext_resource type="Script" path="res://scripts/empty_bicycle.gd" id="1_mlxe6"]
+[ext_resource type="Texture2D" uid="uid://dhq5x42kp7ts0" path="res://assets/graphics/character/empty_bicycle_outlined.png" id="1_qsd63"]
+[ext_resource type="FontFile" uid="uid://dejofkaqg05ai" path="res://assets/fonts/pico-8.ttf" id="3_6po8t"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rjm8g"]
+radius = 1.0
+height = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mn80"]
+size = Vector2(25, 17)
+
+[node name="Empty_bicycle" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 2
+script = ExtResource("1_mlxe6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qsd63")
+hframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rjm8g")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8mn80")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -5.0
+offset_top = -9.0
+offset_right = 11.0
+offset_bottom = -3.0
+scale = Vector2(0.6, 0.6)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_6po8t")
+theme_override_font_sizes/font_size = 6
+text = "RIDE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

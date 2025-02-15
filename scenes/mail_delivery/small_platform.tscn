@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cror10w8e5pau"]
+
+[ext_resource type="Script" path="res://scripts/small_platform.gd" id="1_ej3rh"]
+[ext_resource type="Texture2D" uid="uid://codapr3trb0pt" path="res://assets/mail game/small_platform.png" id="1_wq0jt"]
+[ext_resource type="PackedScene" uid="uid://cd8yjx1xgufm3" path="res://scenes/mail_delivery/gun.tscn" id="2_als7u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1kgf"]
+size = Vector2(8, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4r35"]
+size = Vector2(8, 3)
+
+[node name="Small_platform" type="AnimatableBody2D"]
+z_index = 1
+collision_layer = 128
+collision_mask = 80
+sync_to_physics = false
+script = ExtResource("1_ej3rh")
+GUN = ExtResource("2_als7u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wq0jt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_w1kgf")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_l4r35")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
