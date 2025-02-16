@@ -70,7 +70,7 @@ func throw():
 
 	var paper = newspaper.instantiate()
 	paper.global_position = $Marker2D.global_position
-	get_tree().current_scene.add_child(paper)
+	$"..".add_child(paper)
 
 	can_throw = false
 	newspaper_amount -= 1

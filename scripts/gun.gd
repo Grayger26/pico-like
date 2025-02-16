@@ -8,6 +8,10 @@ var fire_rate : Array = [1, 2, 4, 6]
 var is_shooting = false
 var bullet_texture = 0
 var posstible_bullet_textures = [0, 1, 2, 3]
+@onready var marker_2d: Marker2D = $Marker2D
+@onready var mail_game: Node2D = get_tree().get_first_node_in_group("mail_game")
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,8 +35,9 @@ func shoot():
 	await animation_player.animation_finished 
 
 	var bullet = bullet_scene.instantiate()
-	bullet.global_position = $Marker2D.global_position
-	get_tree().current_scene.add_child(bullet)
+	mail_game.add_child(bullet)
+	bullet.global_position = marker_2d.global_position
+	
 	bullet.sprite_2d.frame = bullet_texture
 
 	timer.start()

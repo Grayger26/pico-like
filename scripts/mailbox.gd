@@ -23,7 +23,7 @@ var timer_started = false
 
 var dir = "right"
 var direction = Vector2.RIGHT
-
+var directions = [Vector2.RIGHT, Vector2.LEFT]
 
 @onready var win_window: Control = $"../MailgameUI/WinWindow"
 @onready var coin_num_label: Label = $"../MailgameUI/WinWindow/WinPanel/CoinNumLabel"
@@ -34,6 +34,7 @@ var coins_for_player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	direction = directions.pick_random()
 	coins_for_player = Global.possible_coins
 	mailbox_color = colors.pick_random()
 	match mailbox_color:

@@ -18,4 +18,7 @@ func _process(delta: float) -> void:
 
 
 func _exit_tree() -> void:
-	pass
+	get_tree().paused = false
+	get_tree().get_first_node_in_group("Guy").set_physics_process(true)
+	get_tree().get_first_node_in_group("Guy").set_process(true)
+	get_tree().get_first_node_in_group("Guy").in_delivery_zone = false

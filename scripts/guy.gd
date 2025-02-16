@@ -22,7 +22,7 @@ var ice_speed = 4
 
 var ground_tiles : TileMapLayer
 var steps : AudioStreamPlayer2D
-
+var in_delivery_zone = false
 var step_is_playing = false
 
 var direction : Vector2 = Vector2.ZERO

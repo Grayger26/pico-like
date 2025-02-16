@@ -35,7 +35,8 @@ font_color = Color(1, 0.92549, 0.152941, 1)
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="MailGame" type="Node2D"]
+[node name="MailGame" type="Node2D" groups=["mail_game"]]
+z_index = 100
 script = ExtResource("1_b140k")
 
 [node name="Blur" type="ColorRect" parent="."]
@@ -68,6 +69,7 @@ position = Vector2(120, 104)
 collision_mask = 16
 
 [node name="walls" type="StaticBody2D" parent="."]
+process_mode = 3
 collision_layer = 16
 collision_mask = 233
 

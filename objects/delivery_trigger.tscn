@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2qbspkmvbyvp"]
+
+[ext_resource type="Script" path="res://scripts/delivery_trigger.gd" id="1_d7oii"]
+[ext_resource type="PackedScene" uid="uid://dwmnd6dahg7he" path="res://scenes/mail_delivery/mail_game.tscn" id="2_xsp1l"]
+[ext_resource type="LabelSettings" uid="uid://dhipagku55rpd" path="res://scenes/mail_delivery/label_settings.tres" id="2_xvtf7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wa8as"]
+size = Vector2(7, 15)
+
+[node name="DeliveryTrigger" type="Area2D"]
+position = Vector2(341, 225)
+collision_layer = 0
+script = ExtResource("1_d7oii")
+mail_game = ExtResource("2_xsp1l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_wa8as")
+
+[node name="DeliverLabel" type="Label" parent="."]
+visible = false
+offset_left = -9.0
+offset_top = -14.0
+offset_right = 19.0
+offset_bottom = -8.0
+scale = Vector2(0.6, 0.6)
+text = "DELIVER"
+label_settings = ExtResource("2_xvtf7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

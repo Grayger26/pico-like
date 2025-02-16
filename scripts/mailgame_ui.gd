@@ -21,6 +21,6 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if win_window.visible == true and Input.is_action_just_pressed("z"):
-		get_tree().current_scene.queue_free()
+		$"..".queue_free()
 	elif lose_window.visible == true and Input.is_action_just_pressed("z"):
-		get_tree().current_scene.queue_free()
+		$"..".queue_free()

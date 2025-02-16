@@ -77,6 +77,7 @@ x={
 2d_physics/layer_7="Newspaper"
 2d_physics/layer_8="Mail platforms"
 2d_physics/layer_9="Bullets"
+2d_physics/layer_10="DeliveryTrigger"
 
 [rendering]
 
