@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2taa3512y4al"]
+
+[ext_resource type="Texture2D" uid="uid://chwc3ubuh1jgp" path="res://assets/other/round_light_1.png" id="1_uija6"]
+
+[node name="StreetLight" type="PointLight2D"]
+enabled = false
+color = Color(1, 0.933663, 0.836916, 1)
+energy = 2.2
+texture = ExtResource("1_uija6")
+texture_scale = 1.2

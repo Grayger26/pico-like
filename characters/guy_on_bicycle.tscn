@@ -279,13 +279,15 @@ shape = SubResource("CapsuleShape2D_g44ke")
 
 [node name="ride" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("3_3q3bo")
-volume_db = -10.0
+volume_db = -20.0
 
 [node name="ring" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("4_yjicq")
+volume_db = -15.0
 
 [node name="stop" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("5_exuut")
+volume_db = -5.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

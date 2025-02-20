@@ -40,7 +40,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	print(speed)
 	update_animation_parameters()
 	ground_type()
 	sfx()
