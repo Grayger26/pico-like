@@ -34,7 +34,6 @@ var coins_for_player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	direction = directions.pick_random()
 	coins_for_player = Global.possible_coins
 	mailbox_color = colors.pick_random()
 	match mailbox_color:

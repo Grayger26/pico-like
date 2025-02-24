@@ -248,7 +248,7 @@ radius = 3.0
 height = 6.0
 
 [node name="Guy_on_bicycle" type="CharacterBody2D"]
-collision_mask = 14
+collision_mask = 1038
 motion_mode = 1
 script = ExtResource("1_r5r2d")
 

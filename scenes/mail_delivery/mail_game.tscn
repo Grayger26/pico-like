@@ -313,6 +313,7 @@ patch_margin_bottom = 4
 [node name="BackgroundMusic" type="Node2D" parent="."]
 process_mode = 3
 
-[node name="bg1" type="AudioStreamPlayer2D" parent="BackgroundMusic"]
+[node name="bg1" type="AudioStreamPlayer" parent="BackgroundMusic"]
 stream = ExtResource("13_hp84y")
+volume_db = -10.0
 autoplay = true

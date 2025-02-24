@@ -253,7 +253,7 @@ height = 4.0
 
 [node name="Guy" type="CharacterBody2D" groups=["Guy"]]
 y_sort_enabled = true
-collision_mask = 526
+collision_mask = 1550
 motion_mode = 1
 script = ExtResource("1_m0o05")
 

@@ -141,6 +141,7 @@ load_path = "res://.godot/imported/base_tilemap.png-ebb19029f1b3ebaeaacf4695f08e
 script = ExtResource("1_hxhmf")
 
 [node name="Tiles" type="Node2D" parent="."]
+position = Vector2(44.522, -13.4708)
 
 [node name="under_layer" type="TileMapLayer" parent="Tiles"]
 z_index = -1
@@ -165,9 +166,10 @@ tile_map_data = PackedByteArray("AAAMAAIAAAAhAAEAAAAMAAMAAAAhAAEAAAAMAAQAAAAhAAE
 tile_set = SubResource("TileSet_2lpii")
 
 [node name="Guy" parent="." instance=ExtResource("3_yxmbk")]
-position = Vector2(76, 94)
+position = Vector2(120.522, 80.5292)
 
 [node name="Exit" type="Area2D" parent="."]
+position = Vector2(44.522, -13.4708)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
@@ -188,6 +190,7 @@ theme_override_font_sizes/font_size = 6
 text = "EXIT"
 
 [node name="Sleep" type="Area2D" parent="."]
+position = Vector2(44.522, -13.4708)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sleep"]

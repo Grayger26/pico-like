@@ -4,6 +4,18 @@ extends Control
 @onready var hours_label: Label = $TimeControl/HoursLabel
 @onready var minutes_label: Label = $TimeControl/MinutesLabel
 
+@onready var z: NinePatchRect = $HintControl/Z
+@onready var x: NinePatchRect = $HintControl/X
+
+@onready var coin_label: Label = $CoinControl/CoinLabel
+
+
+func _process(delta: float) -> void:
+	if Global.coins > 9999999:
+		coin_label.text = str(9999999)
+	else:
+		coin_label.text = str(Global.coins)
+
 
 func _on_time_system_updated(date_time : DateTime) -> void:
 	update_label(day_label, date_time.days, false)

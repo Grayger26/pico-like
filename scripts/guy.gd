@@ -77,6 +77,7 @@ func step_sound():
 	var current_tile : Vector2i = ground_tiles.local_to_map(global_position)
 	var tile_data : TileData = ground_tiles.get_cell_tile_data(current_tile)
 	
+	
 	var ground_type = tile_data.get_custom_data("ground_type")
 	
 	if ground_type != null:

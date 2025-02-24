@@ -16,20 +16,38 @@ var in_transition : bool = false
 enum DayState {MORNING, DAY, EVENING, NIGHT}
 var current_state : DayState = DayState.DAY
 
-func _ready() -> void:
-	var diff_morning_start = time_system.date_time.diff_without_days(morning_start)
-	var diff_day_start = time_system.date_time.diff_without_days(day_start)
-	var diff_evening_start = time_system.date_time.diff_without_days(evening_start)
-	var diff_night_start = time_system.date_time.diff_without_days(night_start)
+func get_minutes_since_midnight(time: DateTime) -> int:
+	return time.hours * 60 + time.minutes
 
-	if diff_night_start > 0 || (diff_evening_start > 0 and diff_night_start <= 0):
+func _ready() -> void:
+	await get_tree().process_frame 
+
+	var current_minutes = get_minutes_since_midnight(time_system.date_time)
+	var morning_minutes = get_minutes_since_midnight(morning_start)
+	var day_minutes = get_minutes_since_midnight(day_start)
+	var evening_minutes = get_minutes_since_midnight(evening_start)
+	var night_minutes = get_minutes_since_midnight(night_start)
+
+	print("Current Minutes:", current_minutes)
+	print("Morning Minutes:", morning_minutes)
+	print("Day Minutes:", day_minutes)
+	print("Evening Minutes:", evening_minutes)
+	print("Night Minutes:", night_minutes)
+
+	if current_minutes >= night_minutes or current_minutes < morning_minutes:
 		current_state = DayState.NIGHT
-	elif diff_evening_start <= 0 and diff_day_start > 0:
+	elif current_minutes >= evening_minutes:
 		current_state = DayState.EVENING
-	elif diff_day_start <= 0 and diff_morning_start > 0:
+	elif current_minutes >= day_minutes:
 		current_state = DayState.DAY
 	else:
 		current_state = DayState.MORNING
+
+	print("New state:", current_state)
+	color = color_map[current_state]
+
+
+
 
 @onready var time_map : Dictionary = {
 	DayState.MORNING: morning_start,
@@ -52,6 +70,8 @@ func _ready() -> void:
 	DayState.NIGHT: night_color
 }
 
+
+
 func update(game_time : DateTime):
 	var next_state = transition_map[current_state]
 	var change_time = time_map[next_state]
@@ -64,6 +84,7 @@ func update(game_time : DateTime):
 		update_transition(time_diff, next_state)
 	else:
 		color = color_map[current_state]
+	
 
 func update_transition(time_diff : int, next_state : DayState):
 	var ratio = 1 - (time_diff as float / (transition_time * 60))
