@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dejgcoy85g52x"]
+[gd_scene load_steps=5 format=3 uid="uid://dejgcoy85g52x"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_gkitd"]
 [ext_resource type="FontFile" uid="uid://dejofkaqg05ai" path="res://assets/fonts/pico-8.ttf" id="2_evo3y"]
 [ext_resource type="Texture2D" uid="uid://vjnf83spe4ne" path="res://assets/mail game/mail set.png" id="3_ef6m0"]
+[ext_resource type="LabelSettings" uid="uid://bq3obqsgm7fho" path="res://ui/ui_label_settings.tres" id="4_lbons"]
 
 [node name="Menu" type="Control"]
 process_mode = 3
@@ -63,3 +64,39 @@ patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
+
+[node name="HintPanel" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.5
+offset_top = -20.0
+offset_right = 64.5
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_ef6m0")
+region_rect = Rect2(80, 16, 16, 16)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="HintLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -16.0
+offset_right = 60.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "z,x - action | ⬅⬆⬇➡ - move"
+label_settings = ExtResource("4_lbons")

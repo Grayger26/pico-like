@@ -122,7 +122,7 @@ time_system = NodePath("../TimeSystem")
 [node name="TimeSystem" type="Node" parent="."]
 script = ExtResource("11_d2skr")
 date_time = SubResource("Resource_hej8t")
-tics_per_second = 300
+tics_per_second = 120
 
 [node name="SceneChangers" type="Node2D" parent="."]
 

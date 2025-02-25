@@ -1055,7 +1055,7 @@ position = Vector2(350, 953)
 [node name="TimeSystem" type="Node" parent="."]
 script = ExtResource("32_ekc81")
 date_time = SubResource("Resource_u3i66")
-tics_per_second = 300
+tics_per_second = 120
 
 [node name="WorldLight" type="DirectionalLight2D" parent="." node_paths=PackedStringArray("time_system")]
 blend_mode = 2
@@ -1181,7 +1181,6 @@ autowrap_mode = 2
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." groups=["bg_music"]]
 stream = ExtResource("20_44wwp")
-volume_db = -15.0
 autoplay = true
 
 [connection signal="updated" from="TimeSystem" to="CanvasLayer/MainUI" method="_on_time_system_updated"]

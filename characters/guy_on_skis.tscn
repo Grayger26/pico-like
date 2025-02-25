@@ -278,3 +278,5 @@ parameters/move/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="skiing_sfx" type="AudioStreamPlayer2D" parent="."]
