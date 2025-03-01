@@ -18,9 +18,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().paused = false
 		queue_free()
 	
-	if Input.is_action_just_pressed("z") and focus.position == quit_button.position:
-		await save_game()
-		get_tree().quit()
+	#if Input.is_action_just_pressed("z") and focus.position == quit_button.position:
+		#await save_game()
+		#get_tree().quit()
 
 
 
